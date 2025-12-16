@@ -1,15 +1,21 @@
 import streamlit as st
 
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.datasets import load_iris
-from sklearn.metrics import accuracy_score
+st.title("UAS AI - Aplikasi Klasifikasi Sederhana")
+st.write("Simulasi klasifikasi tanpa library berat (aman Streamlit Cloud)")
 
-# =========================
-# JUDUL APLIKASI
-# =========================
-st.title("UAS AI - Klasifikasi Iris")
-st.write("Contoh penggunaan scikit-learn di Streamlit")
+st.subheader("Input Data")
+
+umur = st.number_input("Umur", min_value=18, max_value=70, value=30)
+gaji = st.number_input("Gaji (juta)", min_value=1, max_value=20, value=5)
+
+if st.button("Prediksi"):
+    # RULE SEDERHANA (AI BERBASIS ATURAN)
+    if umur >= 30 and gaji >= 6:
+        st.success("✅ DITERIMA")
+    else:
+        st.error("❌ TIDAK DITERIMA")
+
+st.caption("Model: Rule-Based Artificial Intelligence")
 
 # =========================
 # LOAD DATASET
@@ -52,3 +58,4 @@ petal_width  = st.number_input("Petal Width", value=0.2)
 if st.button("Prediksi"):
     hasil = model.predict([[sepal_length, sepal_width, petal_length, petal_width]])
     st.write("Hasil Prediksi:", iris.target_names[hasil[0]])
+
